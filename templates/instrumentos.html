@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} Instrumentos {% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <a href="{{ url_for('inicio') }}" role="button">
+                    <button type="button" class="btn link btn-outline-light mb-3">Volver</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

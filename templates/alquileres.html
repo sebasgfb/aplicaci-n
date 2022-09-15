@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %} Instrumentos Arasunu {% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <div>
+                    <div>
+                        <a type="button" class="btn link btn-outline-light mb-3" data-bs-toggle="modal" data-bs-target="#addalquiler">
+                            Añadir Alquiler
+                        </a>
+                        <br>
+                        <a href="{{ url_for('inicio') }}" role="button">
+                            <button type="button" class="btn link btn-outline-light mb-3">Volver</button>
+                        </a>
+                        <div class="card">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Dirección</th>
+                                    <th scope="col">Fecha Alquilado</th>
+                                    <th scope="col">Fecha Limite</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for alquiler in alquileres %}
+                                        <tr>
+                                            <td>{{alquiler.idalquiler }}</td>
+                                            <td>{{alquiler.nombrec }}</td>
+                                            <td>{{alquiler.apellidoc }}</td>
+                                            <td>{{alquiler.telefonoc }}</td>
+                                            <td>{{alquiler.direccionc }}</td>
+                                            <td>{{alquiler.wip1 }}</td>
+                                            <td>{{alquiler.wip2}}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                    <a href="/update/{{alquiler.idalquiler}}" class="btn btn-dark btn-xs" data-bs-toggle="modal" data-bs-target="#editalquiler{{alquiler.idalquiler}}">Editar</a>
+                                                    <a href="/delete/{{alquiler.idalquiler}}" class="btn btn-warning btn-xs" onclick="return confirm('Estas seguro?')">Eliminar</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                            <div class="modal fade" id="editalquiler{{alquiler.idalquiler}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title text-dark" id="editalquilerLabel">Editar Alquiler</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-dark text-center">
+                                                            <form action= "{{ url_for('update') }}" method="post">
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">ID</span>
+                                                                    <input type="text" class="form-control" name="idalquiler" id="idalquiler" value ="{{alquiler.idalquiler}}" placeholder="ID" aria-label="idalquiler" aria-describedby="idalquiler">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">Nombre</span>
+                                                                    <input type="text" class="form-control" name="nombrec" id="nombrec" value ="{{alquiler.nombrec}}" placeholder="Nombre de Cliente" aria-label="nombrec" aria-describedby="nombrec">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">Apellido</span>
+                                                                    <input type="text" class="form-control"  name="apellidoc" id="apellidoc" value ="{{alquiler.apellidoc}}" placeholder="Apellido de Cliente" aria-label="apellidoc" aria-describedby="apellidoc">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">Telefono</span>
+                                                                    <input type="text" class="form-control" name="telefonoc" id="telefonoc" value ="{{alquiler.telefonoc}}" placeholder="Telefono de Cliente" aria-label="Telefono de Cliente" aria-describedby="apellidoc">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">Dirección</span>
+                                                                    <input type="text" class="form-control" name="direccionc" id="direccionc" value ="{{alquiler.direccionc}}" placeholder="Dirección de Cliente" aria-label="Dirección de Cliente" aria-describedby="apellidoc">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text">Fecha y Hora Alquilado</span>
+                                                                    <input type="datetime-local" class="form-control" name="wip1" id="wip1" value ="{{alquiler.wip1}}" placeholder="WIP1" aria-label="WIP1" aria-describedby="wip1">
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text" id="wip2">Fecha y Hora Limite</span>
+                                                                    <input type="datetime-local" class="form-control" name="wip2" id="wip2" value ="{{alquiler.wip2}}" placeholder="WIP2" aria-label="WIP2" aria-describedby="wip2">
+                                                                </div>
+                                                                <button type="button submit mb-5" class="btn btn-primary">Save changes</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                        <div class="modal fade" id="addalquiler" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="addalquilerLabel">Añadir Alquiler</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark text-center">
+                                        <form method="post">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Nombre</span>
+                                                <input type="text" class="form-control" name="nombrec" id="nombrec" placeholder="Nombre de Cliente" aria-label="nombrec" aria-describedby="nombrec">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Apellido</span>
+                                                <input type="text" class="form-control"  name="apellidoc" id="apellidoc" placeholder="Apellido de Cliente" aria-label="apellidoc" aria-describedby="apellidoc">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Telefono</span>
+                                                <input type="text" class="form-control" name="telefonoc" id="telefonoc" placeholder="Telefono de Cliente" aria-label="Telefono de Cliente" aria-describedby="apellidoc">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Dirección</span>
+                                                <input type="text" class="form-control" name="direccionc" id="direccionc" placeholder="Dirección de Cliente" aria-label="Dirección de Cliente" aria-describedby="apellidoc">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">Fecha y Hora Alquilado</span>
+                                                <input type="datetime-local" class="form-control" name="wip1" id="wip1" placeholder="WIP1" aria-label="WIP1" aria-describedby="wip1">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="wip2">Fecha y Hora Limite</span>
+                                                <input type="datetime-local" class="form-control" name="wip2" id="wip2" placeholder="WIP2" aria-label="WIP2" aria-describedby="wip2">
+                                            </div>
+                                            <button type="button submit mb-5" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endblock %}

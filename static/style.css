@@ -1,0 +1,18 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(50, 45, 182), rgb(53, 216, 69));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(114, 220, 154), rgb(213, 222, 47))
+    }
+
+.navbar-color{
+    background: linear-gradient(to right, rgb(114, 220, 154), rgb(213, 222, 47));
+}
+
+.text-color{
+    color: #000000
+}

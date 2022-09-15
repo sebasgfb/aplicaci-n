@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Instrumentos Arasunu {% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+{% block content %}
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+                <div>
+                    <div>
+                        <br><br><br>
+                        <h2>Sistema para alquiler de instrumentos de percusión</h2>
+                        <a href="/alquileres" role="button">
+                            <button type="button" class="btn link btn-lg btn-outline-light mt-3">Mostrar Alquileres</button>
+                        </a>
+                        <br>
+                        <a href="/instrumentos" role="button">
+                            <button type="button" class="btn link btn-lg btn-outline-light mt-3">Mostrar Instrumentos</button>
+                        </a>
+                        <br>
+                        <a href="/caja" role="button">
+                            <button type="button" class="btn link btn-lg btn-outline-light mt-3">Caja</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endblock %}
